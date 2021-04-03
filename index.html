@@ -4595,7 +4595,7 @@ function MineKhan() {
 			target = world.id
 			host = true
 		}
-		multiplayer = new WebSocket("wss://willard.fun/ws?target=" + target)
+		multiplayer = new WebSocket("wss://https://geekycraft-multiplayer.herokuapp.com/ws?target=" + target)
 		multiplayer.onopen = event => {
 			multiplayer.send(JSON.stringify({
 				type: "connect"
