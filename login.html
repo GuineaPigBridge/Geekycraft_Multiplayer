@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--
+
+The main parts of the grid layout are:
+
+Within the .grid element:
+	display: grid;
+	grid-template-columns: 1fr 250px auto auto 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr auto;
+	grid-gap: 5px;
+	grid-template-areas:
+		". title title title ."
+		". username_input username_label username_error ."
+		". password_input password_label password_error ."
+		". buttons buttons buttons ."
+		". results results results .";
+
+`1fr` will take up 1 fraction of the remaining space
+`auto` will collapse/expand as required which is perfect for the error messages
+
+For each html element, setting the grid-area based on the template areas to position them in the correct location.
+
+The rest of the CSS is just styling.
+
+-->
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Login to Willard's services">
+		<meta name="author" content="Willard21">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login | Willard.fun</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				background-color: #1D1D1D;
+				font-family: "Montserrat", sans-serif;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: 1fr 250px auto auto 1fr;
+				grid-template-rows: 1fr 1fr 1fr 1fr auto;
+				grid-gap: 5px;
+				grid-template-areas:
+					". title title title ."
+					". username_input username_label username_error ."
+					". password_input password_label password_error ."
+					". buttons buttons buttons ."
+					". results results results .";
+				margin: 20px auto;
+				padding: 10px;
+				background-color: rgb(49, 49, 49);
+				border: solid 5px rgb(227, 224, 227);
+				width: 580px;
+				border-radius: 50px;
+				color: rgb(255, 255, 255);
+			}
+
+			.title,
+			.username_input,
+			.username_label,
+			.username_error,
+			.password_input,
+			.password_label,
+			.password_error,
+			.buttons {
+				display: flex;
+				align-items: center;
+			}
+
+			.title {
+				grid-area: title;
+				justify-content: center;
+				font-size: 30px;
+				padding: 10px;
+				color: rgb(255, 255, 255);
+			}
+
+			.username_input {
+				grid-area: username_input;
+				justify-content: center;
+			}
+			.username_label {
+				grid-area: username_label;
+				justify-content: start;
+			}
+			.username_error {
+				grid-area: username_error;
+				justify-content: start;
+			}
+
+			.password_input {
+				grid-area: password_input;
+				justify-content: center;
+			}
+			.password_label {
+				grid-area: password_label;
+				justify-content: start;
+			}
+			.password_error {
+				grid-area: password_error;
+				justify-content: start;
+			}
+
+			.buttons {
+				grid-area: buttons;
+				justify-content: center;
+			}
+			.buttons button {
+				margin: 5px;
+				padding: 10px 15px;
+				border-radius: 10px;
+				border: none;
+				color: rgb(255, 255, 255);
+				background-color: rgb(59, 59, 59);
+				font-size: 17px;
+			}
+			.buttons button:hover,
+			.buttons button:focus {
+				background-color: rgb(74, 73, 74);
+				cursor: pointer;
+				outline: none;
+			}
+
+			.results {
+				grid-area: results;
+				text-align: center;
+			}
+
+			input[type='text'],
+			input[type='password'] {
+				font-family: "Montserrat", sans-serif;
+				width: 100%;
+				height: auto;
+				border-radius: 10px;
+				border: solid 1px rgb(145, 140, 145);
+				padding: 10px;
+			}
+
+			input[type='text']:focus,
+			input[type='password']:focus {
+				outline: none;
+				padding: 9px;
+				border: solid 2px rgb(237, 124, 154);
+			}
+
+			.error, #error {
+				color: rgb(237, 124, 154);
+			}
+
+			#success {
+				color: rgb(140, 224, 119);
+			}
+
+		</style>
+	</head>
+	<body>
+		<main>
+			<div id="form" class="grid">
+				<div class="title">Login</div>
+
+				<div class="username_input">
+					<input id="username" type="text" placeholder="Username" autocomplete="off">
+				</div>
+				<div class="username_label">Username</div>
+				<div class="username_error error" id="usererror"></div>
+
+				<div class="password_input">
+					<input id="password" type="password" placeholder="Password" autocomplete="off">
+				</div>
+				<div class="password_label">Password</div>
+				<div class="password_error error" id="passerror"></div>
+
+				<div class="buttons">
+					<button id="loginButton">Login</button>
+					<button id="registerButton">Register</button>
+				</div>
+
+				<div class="results">
+					<p id="error"></p>
+					<p id="success"></p>
+				</div>
+			</div>
+		</main>
+
+		<script type="application/javascript">
+			document.getElementById("form").onkeydown = e => {
+				if (e.key?.toLowerCase() === "enter") {
+					login()
+				}
+			}
+
+			async function login() {
+				let username = document.getElementById("username").value
+				let password = document.getElementById("password").value
+				let userError = document.getElementById("usererror")
+				let passError = document.getElementById("passerror")
+				let error = document.getElementById("error")
+
+				userError.textContent = ""
+				passError.textContent = ""
+				error.textContent = ""
+
+				if (!username) userError.textContent = "Must enter a username."
+				if (!password) passError.textContent = "Must enter a password."
+
+				if (userError.textContent || passError.textContent) return
+
+				let exists = await fetch(`https://willard.fun/exists/${username}`).then(res => res.json())
+				if (!exists) {
+					userError.textContent = "Username doesn't exist. Did you mean to register?"
+					return
+				}
+
+				let result = await fetch("https://willard.fun/login", {
+					method: "POST",
+					body: JSON.stringify({
+						username: username,
+						password: password
+					}),
+					headers: {
+						"Content-Type": "application/json; charset=UTF-8"
+					}
+				}).then(res => res.json())
+
+				if (result.success) {
+					location.href = result.redirect
+				} else {
+					if (result.redirect) {
+						location.href = result.redirect
+					} else {
+						error.textContent = result.message
+					}
+				}
+			}
+
+			async function register() {
+				let username = document.getElementById("username").value
+				let password = document.getElementById("password").value
+				let userError = document.getElementById("usererror")
+				let passError = document.getElementById("passerror")
+				let error = document.getElementById("error")
+
+				userError.textContent = ""
+				passError.textContent = ""
+				error.textContent = ""
+
+				if (!username) userError.textContent = "Must enter a username."
+				if (!password) passError.textContent = "Must enter a password."
+
+				if (userError.textContent || passError.textContent) return
+
+				let exists = await fetch(`https://willard.fun/exists/${username}`).then(res => res.json())
+				if (exists) {
+					userError.textContent = "Username already exists. Did you mean to login?"
+					return
+				}
+
+				let result = await fetch("register.html", {
+					method: "POST",
+					body: JSON.stringify({
+						username: username,
+						password: password
+					}),
+					headers: {
+						"Content-Type": "application/json; charset=UTF-8"
+					}
+				}).then(res => res.json())
+
+				if (result.success) {
+					if (result.redirect) {
+						location.href = result.redirect
+					} else {
+
+					}
+				} else {
+					if (result.redirect) {
+						location.href = result.redirect
+					} else {
+						error.textContent = result.message
+					}
+				}
+			}
+
+			document.getElementById("loginButton").addEventListener('click', login);
+			document.getElementById("registerButton").addEventListener('click', register);
+		</script>
+	</body>
+</html>
