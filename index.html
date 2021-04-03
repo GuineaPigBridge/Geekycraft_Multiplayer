@@ -5572,7 +5572,7 @@ function MineKhan() {
 
 		// Main menu buttons
 		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => changeScene("loadsave menu"))
-		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("geekycraft-multiplayer"), "Please visit https://geekycraft_multiplayer to enjoy multiplayer.")
+		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://geekycraft-multiplayer to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
