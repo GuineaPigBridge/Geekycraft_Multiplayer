@@ -5688,7 +5688,7 @@ function MineKhan() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
+		}, () => multiplayer || location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			initWorldsMenu()
