@@ -4579,9 +4579,6 @@ function MineKhan() {
 	}
 
 	async function initMultiplayer(target) {
-		if (multiplayer) return
-		let logged = await loggedIn()
-		if (!logged) return
 
 		let host = false
 		if (!target) {
