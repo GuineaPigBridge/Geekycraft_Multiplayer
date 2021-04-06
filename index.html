@@ -33,8 +33,27 @@ To share your save with other people, copy your world string into the "loadStrin
  * ; (semicolon): Release the pointer without pausing (for screenshots)
  * Backspace or delete: drops the item you're holding right now
 
+	Notes and accreditation:
+ * This program (MineKhan) was made by Willard (me). The original is https://www.khanacademy.org/cs/mc/5647155001376768 (just adding this so that spin-offs have it)
+ * Zushah helped me with some of the menus in the 0.6 update via GitHub. https://www.khanacademy.org/profile/zushah77
+ * Element118 helped speed up the process of adding new textures significantly. https://www.khanacademy.org/profile/element118
+ * Danielkshin made the current main menu background. https://www.khanacademy.org/profile/danielkshin
+
+ * This program originated as a spin-off of ScusCraft by ScusX.
+ * It's 99% different code at this point, but I still never would have made it this far without his code for reference.
+ * ScusCraft can be found here: https://www.khanacademy.org/computer-programming/scuscraft-3d/5145400332058624
+ * My original spin-off can be found here: https://www.khanacademy.org/computer-programming/high-performance-minecraft/5330738124357632
+ * While porting the code from PJS to a webpage, I copied the PJS source code for a few of their helper functions from here: https://raw.githubusercontent.com/Khan/processing-js/master/processing.js
+ * The textures are 100% copied from real Minecraft, and are the property of Mojang and Microsoft with whom I have no association.
+ * The real Minecraft game can be bought and downloaded at https://www.minecraft.net/en-us/
+
 
  * Chunks are kept in memory until you restart. So don't explore too far or memory usage will grow until it crashes unrecoverably.
+
+
+	To-Do:
+ * A lot. Check out the GitHub repo if you'd like to collaborate on this. Must use Discord.
+ * https://github.com/Willard21/MineKhan
 
 
 	How it works:
@@ -4573,15 +4592,6 @@ function MineKhan() {
 
 	var multiplayer = null
 	async function loggedIn() {
-		let exists = await fetch("https://willard.fun/profile").then(res => res.text()).catch(e => 401)
-		if (!exists || exists === "401") {
-			if (location.href.startsWith("https://willard.fun")) {
-				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
-			} else {
-				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
-			}
-			return false
-		}
 		return true
 	}
 
@@ -4595,7 +4605,7 @@ function MineKhan() {
 			target = world.id
 			host = true
 		}
-		multiplayer = new WebSocket("wss://https://geekycraft-multiplayer.herokuapp.com/ws?target=" + target)
+		multiplayer = new WebSocket("wss://willard.fun/ws?target=" + target)
 		multiplayer.onopen = event => {
 			multiplayer.send(JSON.stringify({
 				type: "connect"
@@ -5572,7 +5582,7 @@ function MineKhan() {
 
 		// Main menu buttons
 		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => changeScene("loadsave menu"))
-		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://geekycraft-multiplayer to enjoy multiplayer.")
+		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"), "Please visit https://geekycraft-multiplayer.herokuapp.com to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
@@ -5695,7 +5705,7 @@ function MineKhan() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://willard.fun"))
+		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			initWorldsMenu()
