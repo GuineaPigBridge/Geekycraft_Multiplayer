@@ -4605,7 +4605,7 @@ function MineKhan() {
 			target = world.id
 			host = true
 		}
-		multiplayer = new WebSocket("wss://geekycraft-multiplayer.herokuapp.com/ws?target=" + target)
+		multiplayer = new WebSocket("wss://willard.fun/ws?target=" + target)
 		multiplayer.onopen = event => {
 			multiplayer.send(JSON.stringify({
 				type: "connect"
@@ -4649,7 +4649,7 @@ function MineKhan() {
 		let logged = await loggedIn()
 		if (!logged) return []
 
-		return await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.json())
+		return await fetch("https://willard.fun/minekhan/worlds").then(res => res.json())
 	}
 
 	let fogDist = 16
@@ -5582,7 +5582,7 @@ function MineKhan() {
 
 		// Main menu buttons
 		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => changeScene("loadsave menu"))
-		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"), "Please visit https://geekycraft-multiplayer.herokuapp.com to enjoy multiplayer.")
+		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://geekycraft-multiplayer.herokuapp.com to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
@@ -5705,7 +5705,7 @@ function MineKhan() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
+		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			initWorldsMenu()
