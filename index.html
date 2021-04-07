@@ -4655,9 +4655,6 @@ function MineKhan() {
 	}
 
 	async function getWorlds() {
-		let logged = await loggedIn()
-		if (!logged) return []
-
 		return await fetch("https://willard.fun/minekhan/worlds").then(res => res.json())
 	}
 
