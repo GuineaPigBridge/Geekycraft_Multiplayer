@@ -5629,7 +5629,7 @@ function MineKhan() {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
 			initMultiplayerMenu()
 			changeScene("multiplayer menu")
-		}, () => !location.href.startsWith("https://"), "Please visit https://willard.fun/login to enjoy multiplayer.")
+		}, () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"), "Please visit https://willard.fun/login to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
@@ -5752,7 +5752,7 @@ function MineKhan() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://"))
+		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			initWorldsMenu()
