@@ -394,6 +394,13 @@ function MineKhan() {
 				}
 			}
 		},
+		nothing: n => {
+			for (let x = 0; x < 16; ++x) {
+				for (let y = 0; y < 16; ++y) {
+					setPixel(n, x, y, 0, 0, 0, 0)
+				}
+			}
+		},
 		dirt: "0g0g70ordrzz0u30g730wa4vzz0xnyl8f11lrk7315qj7jz1fh47pb6553365533033636350335403653650063306333633300635163503655353653535605335031350330553500033033366333433663663535336655335055335553353530355333033503300333336635353663650660554353355635155305303053556333333366353323553060365553063030663533555365534355335530",
 		stone: "0g0g40sywflr0wb8hdr0zdjj0f13tzldr3333211210112222221212222220012121001110111222222233232233222111122111212333312223222222211010131223331331112222110010112211122233323223332222212232223332233332021211001212211122222332222233232111232112200101332112211122111321122222222233332222221123322122",
 		logSide: "0g0g60fl1ssf0l5j1fj0qftm2n0wa7mdb14cs7wf16az8xr3143304330341432315230523034133230223052313113324032313232301342413230325232314343134131524131432313422343433143230343243342324331053324324242433315332332414303333432303231430331343230533053135133424052303323531343314231333343143340313114334314134131331432",
@@ -503,6 +510,7 @@ function MineKhan() {
 			textures: [],
 			transparent: true,
 			shadow: false,
+			solid: false
 		},
 		{
 			name: "grass",
@@ -637,12 +645,14 @@ function MineKhan() {
 		{ name: "polishedDiorite" },
 		{ name: "granite" },
 		{ name: "polishedGranite" },
+		{ name: "light", textures: "nothing", lightLevel: 15, solid: false, icon: "glass", transparent: true, shadow: false }
 		// I swear, if y'all don't stop asking about TNT every 5 minutes!
 		/* {
 			name: "tnt",
 			textures: ["tntBottom", "tntTop", "tntSides"]
 		},*/
 	];
+	window.blockData = blockData
 
 	const BLOCK_COUNT = blockData.length;
 
@@ -653,8 +663,8 @@ function MineKhan() {
 
 		if ( !("textures" in data) ) {
 			data.textures = new Array(6).fill(data.name);
-		} else if (typeof textures === "string") {
-			data.textures = new Array(6).fill(data.texture);
+		} else if (typeof data.textures === "string") {
+			data.textures = new Array(6).fill(data.textures);
 		} else {
 			const { textures } = data;
 
@@ -679,6 +689,8 @@ function MineKhan() {
 			: true;
 
 		data.lightLevel = data.lightLevel || 0;
+		data.solid = data.solid !== undefined ? data.solid : true
+		data.icon = data.icon || false
 	}
 
 	// implementation of xxHash
@@ -1443,7 +1455,11 @@ function MineKhan() {
 				window.boxCenterTop.placeholder = "Enter World Name"
 				window.boxCenterTop.value = ""
 			}
-		}
+		},
+		"multiplayer menu": {
+			enter: [window.worlds],
+			exit: [window.worlds]
+		},
 	}
 
 	let screen = "main menu"
@@ -2007,6 +2023,9 @@ function MineKhan() {
 		for (let i = 1; i < BLOCK_COUNT; i++) {
 			let data = []
 			let block = blockData[i]
+			if (block.icon) {
+				block = blockData[blockIds[block.icon]]
+			}
 			for (let j = 11; j >= 0; j--) {
 				data.push(-hexagonVerts[j * 3 + 0] * scale)
 				data.push(hexagonVerts[j * 3 + 1] * scale)
@@ -2885,7 +2904,7 @@ function MineKhan() {
 			for (let y = pminY; y <= pmaxY; y++) {
 				for (let z = pminZ; z <= pmaxZ; z++) {
 					let block = world.getBlock(x, y, z)
-					if (block) {
+					if (blockData[block].solid) {
 						contacts.add(x, y, z, block)
 					}
 				}
@@ -3838,7 +3857,9 @@ function MineKhan() {
 			this.lit = true
 		}
 		setLight(x, y, z, level, blockLight) {
-			this.sections[y >> 4].setLight(x, y & 15, z, level, blockLight)
+			if (y < this.sections.length * 16) {
+				this.sections[y >> 4].setLight(x, y & 15, z, level, blockLight)
+			}
 		}
 		getLight(x, y, z, blockLight = 0) {
 			if (y >= this.sections.length * 16) return 15
@@ -4592,6 +4613,15 @@ function MineKhan() {
 
 	var multiplayer = null
 	async function loggedIn() {
+		let exists = await fetch("https://willard.fun/profile").then(res => res.text()).catch(e => 401)
+		if (!exists || exists === "401") {
+			if (location.href.startsWith("https://willard.fun")) {
+				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
+			} else {
+				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
+			}
+			return false
+		}
 		return true
 	}
 
@@ -4633,6 +4663,8 @@ function MineKhan() {
 				world = new World()
 				world.loadSave(packet.data)
 				changeScene("loading")
+			} else if (packet.type === "users") {
+				console.log(packet.data)
 			}
 		}
 
@@ -4643,13 +4675,17 @@ function MineKhan() {
 			}
 			multiplayer = null
 		}
+
+		window.online = function() {
+			multiplayer.send("fetchUsers")
+		}
 	}
 
 	async function getWorlds() {
 		let logged = await loggedIn()
 		if (!logged) return []
 
-		return await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.json())
+		return await fetch("https://willard.fun/minekhan/worlds").then(res => res.json())
 	}
 
 	let fogDist = 16
@@ -4675,6 +4711,7 @@ function MineKhan() {
 			this.meshQueue = []
 			this.loadFrom = []
 			this.entities = []
+			this.eventQueue = []
 			this.lastChunk = ","
 		}
 		genChunk(chunk) {
@@ -4763,22 +4800,27 @@ function MineKhan() {
 		}
 		setBlock(x, y, z, blockID, lazy, remote) {
 			if (!this.chunks[x >> 4] || !this.chunks[x >> 4][z >> 4]) {
+				this.eventQueue.push([x, y, z, blockID])
 				return
 			}
 			let chunk = this.chunks[x >> 4][z >> 4]
+			if (!chunk.buffer && remote) {
+				this.eventQueue.push([x, y, z, blockID])
+				return
+			}
 
 			let xm = x & 15
 			let zm = z & 15
 			if (blockID) {
 				chunk.setBlock(xm, y, zm, blockID, !lazy)
 				let data = blockData[blockID]
-				if (!lazy && chunk.buffer && !data.transparent && screen !== "loading") {
+				if (!lazy && chunk.buffer && (!data.transparent || data.lightLevel) && screen !== "loading") {
 					this.updateLight(x, y, z, true, data.lightLevel)
 				}
 			} else {
 				let data = blockData[chunk.getBlock(xm, y, zm)]
 				chunk.deleteBlock(xm, y, zm, !lazy)
-				if (!lazy && chunk.buffer && !data.transparent && screen !== "loading") {
+				if (!lazy && chunk.buffer && (!data.transparent || data.lightLevel) && screen !== "loading") {
 					this.updateLight(x, y, z, false, data.lightLevel)
 				}
 			}
@@ -4835,6 +4877,7 @@ function MineKhan() {
 		}
 		updateLight(x, y, z, place, blockLight = 0) {
 			let chunk = this.getChunk(x, z)
+			if (!chunk) return
 			let cx = x & 15
 			let cz = z & 15
 			let center = chunk.getLight(cx, y, cz, 0)
@@ -4888,7 +4931,8 @@ function MineKhan() {
 			}
 			else if (place && (center !== 0 || blight !== 0)) { // Block was placed; decrease light levels
 				let respread = []
-				for (let i = 0; i <= center + 1; i++) respread[i] = []
+				// for (let i = 0; i <= center + 1; i++) respread[i] = []
+				for (let i = 0; i <= 15; i++) respread[i] = []
 				chunk.setLight(cx, y, cz, 0, 0)
 				chunk.setLight(cx, y, cz, 0, 1)
 				spread.push(x, y, z)
@@ -4910,7 +4954,8 @@ function MineKhan() {
 				// Block light
 				if (blight) {
 					respread.length = 0
-					for (let i = 0; i <= blight + 1; i++) respread[i] = []
+					// for (let i = 0; i <= blight + 1; i++) respread[i] = []
+					for (let i = 0; i <= 15; i++) respread[i] = []
 					spread.length = 0
 					spread.push(x, y, z)
 					chunk.unSpreadLight(spread, blight - 1, respread, 1)
@@ -5049,7 +5094,12 @@ function MineKhan() {
 		}
 		render() {
 			initModelView(p)
-			let skyLight = min(max(abs(++frameCount % 7200 - 3600) / 360 - 5, 0.1), 1)
+			let skyLight
+			if (multiplayer) {
+				skyLight = min(max(abs(Date.now() % 1200000 - 600000) / 60000 - 5, 0.1), 1)
+			} else {
+				skyLight = min(max(abs(++frameCount % 7200 - 3600) / 360 - 5, 0.1), 1)
+			}
 			gl.clearColor(sky[0] * skyLight, sky[1] * skyLight, sky[2] * skyLight, 1)
 			gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT)
 
@@ -5581,8 +5631,14 @@ function MineKhan() {
 		const always = () => true
 
 		// Main menu buttons
-		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => changeScene("loadsave menu"))
-		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => changeScene("multiplayer menu"), () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://willard.fun/login to enjoy multiplayer.")
+		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => {
+			initWorldsMenu()
+			changeScene("loadsave menu")
+		})
+		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
+			initMultiplayerMenu()
+			changeScene("multiplayer menu")
+		}, () => !location.href.startsWith("https://willard.fun"), "Please visit https://willard.fun/login to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
@@ -5593,14 +5649,14 @@ function MineKhan() {
 				trees = false
 			}
 			return superflat
-		},"To show you the power of TREES, I sawed this boat in half!")
+		})
 		Button.add(width / 2, 235, 300, 40, ["Caves: On", "Caves: Off"], "creation menu", r => caves = r === "Caves: On", function() {
 			if (superflat) {
 				this.index = 1
 				caves = false
 			}
 			return superflat
-		},"Does exactly what it says on the tin.")
+		})
 		Button.add(width / 2, 285, 300, 40, "Game Mode: Creative", "creation menu", nothing, always, "Coming Soon\n\nPlease stop asking for survival features. I don't want to half-implement anything, and I don't currently have the systems in place to create a full-featured survival mode. It'll come in due time.")
 		Button.add(width / 2, 335, 300, 40, "Difficulty: Peaceful", "creation menu", nothing, always, "Coming soon\n\nPlease stop asking for mobs. Adding them will take a very long time. I know a lot of people want them, so just be patient.")
 		Button.add(width / 2, height - 90, 300, 40, "Create New World", "creation menu", r => {
@@ -5638,7 +5694,7 @@ function MineKhan() {
 		let w2 = min(width / 2 - 10, 450)
 		let x2 = w2 / 2 + 5
 		let mid = width / 2
-		Button.add(mid - 3 * x4, height - 30, w4, 40, "Edit", "loadsave menu", r => changeScene("editworld"), () => (selected() || !worlds[selectedWorld].edited), "For people who are nosy enough to read this, don't. It's absolute rubbish.")
+		Button.add(mid - 3 * x4, height - 30, w4, 40, "Edit", "loadsave menu", r => changeScene("editworld"), () => (selected() || !worlds[selectedWorld].edited))
 		Button.add(mid - x4, height - 30, w4, 40, "Delete", "loadsave menu", r => {
 			if (worlds[selectedWorld] && confirm(`Are you sure you want to delete ${worlds[selectedWorld].name}?`)) {
 				deleteFromDB(selectedWorld)
@@ -5646,10 +5702,10 @@ function MineKhan() {
 				delete worlds[selectedWorld]
 				selectedWorld = 0
 			}
-		}, () => (selected() || !worlds[selectedWorld].edited), "Delete the world forever.(A long time!)")
+		}, () => (selected() || !worlds[selectedWorld].edited), "Delete the world forever.")
 		Button.add(mid + x4, height - 30, w4, 40, "Export", "loadsave menu", r => {
 			boxCenterTop.value = worlds[selectedWorld].code
-		}, selected, "Export the save code into the text box above for copy/paste. The key to wrighting a good essay.")
+		}, selected, "Export the save code into the text box above for copy/paste.")
 		Button.add(mid + 3 * x4, height - 30, w4, 40, "Cancel", "loadsave menu", r => changeScene("main menu"))
 		Button.add(mid - x2, height - 75, w2, 40, "Play Selected World", "loadsave menu", r => {
 			world = new World()
@@ -5705,7 +5761,7 @@ function MineKhan() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com/"))
+		}, () => !!multiplayer || !location.href.startsWith("https://willard.fun"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			initWorldsMenu()
@@ -5719,10 +5775,15 @@ function MineKhan() {
 		Button.add(width / 2, 395, width / 3, 40, "Back", "comingsoon menu", r => changeScene(previousScreen))
 
 		// Multiplayer buttons
-		getWorlds().then(worlds => {
-			Button.add(width / 2, 355, width / 3, 40, worlds.length ? `Join A Random World` : "No Worlds To Join", "multiplayer menu", () => initMultiplayer(worlds[0].target), () => !worlds.length, `${worlds.length} worlds open.`)
-		})
-		Button.add(width / 2, 395, width / 3, 40, "Back", "comingsoon menu", r => changeScene(previousScreen))
+		Button.add(mid + 3 * x4, height - 30, w4, 40, "Cancel", "multiplayer menu", r => changeScene("main menu"))
+		Button.add(mid - x2, height - 75, w2, 40, "Play Selected World", "multiplayer menu", r => {
+			world = new World()
+			win.world = world
+
+			if (selectedWorld) {
+				initMultiplayer(selectedWorld)
+			}
+		}, () => !selectedWorld)
 
 		// Settings Sliders
 		Slider.add(width/2, 245, width / 3, 40, "options", "Render Distance", 1, 32, "renderDistance", val => settings.renderDistance = round(val))
@@ -6841,6 +6902,51 @@ function MineKhan() {
 		caves = true
 	}
 
+	async function initMultiplayerMenu() {
+		while (window.worlds.firstChild) {
+			window.worlds.removeChild(window.worlds.firstChild)
+		}
+		selectedWorld = 0
+		window.boxCenterTop.value = ""
+
+		const deselect = () => {
+			let elem = document.getElementsByClassName("selected")
+			if (elem && elem[0]) {
+				elem[0].classList.remove("selected")
+			}
+		}
+
+		let servers = await getWorlds()
+
+		function addWorld(name, host, online, id) {
+			let div = doc.createElement("div")
+			div.className = "world"
+			div.onclick = e => {
+				deselect()
+				div.classList.add("selected")
+				selectedWorld = id
+			}
+			let br = "<br>"
+			div.id = id
+			div.innerHTML = "<strong>" + name + "</strong>" + br
+			
+			div.innerHTML += "Hosted by " + host + br
+			div.innerHTML += online + " players online" + br
+			
+			window.worlds.appendChild(div)
+		}
+
+		worlds = {}
+
+		for (let data of servers) {
+			addWorld(data.name, data.host, data.online, data.target)
+			worlds[data.target] = data
+		}
+		window.worlds.onclick = Button.draw
+		window.boxCenterTop.onkeyup = Button.draw
+	}
+
+
 	function initEverything() {
 		console.log("Initializing world.")
 
@@ -7015,10 +7121,10 @@ function MineKhan() {
 		drawScreens.editworld = dirt
 		drawScreens["multiplayer menu"] = () => {
 			dirt()
-			textSize(50)
-			ctx.textAlign = "center"
-			text("Select Multiplayer Server", width / 2, 100)
-			Button.add(width / 2, 355, width / 3, 40, worlds.length ? `Join A Random World` : "No Worlds To Join", "multiplayer menu", () => initMultiplayer(worlds[0].target), () => !worlds.length, `${worlds.length} worlds open.`)
+			ctx.textAlign = 'center'
+			textSize(20)
+			fill(255)
+			text("Select Server", width / 2, 20)
 		}
 	})()
 
@@ -7126,4 +7232,34 @@ function sphereoid(w, h, d, id) {
             }
         }
     }
-} -->
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(() => resolve(), ms))
+}
+
+async function asphereoid(w, h, d, id) {
+	let px = p2.x
+	let py = p2.y
+	let pz = p2.z
+    let w2 = w * w
+    let h2 = h * h
+    let d2 = d * d
+    let w3 = (w - 1.5) * (w - 1.5)
+    let h3 = (h - 1.5) * (h - 1.5)
+    let d3 = (d - 1.5) * (d - 1.5)
+
+    for (let y = -h; y < h; y++) {
+        for (let x = -w; x <= w; x++) {
+            for (let z = -d; z <= d; z++) {
+                let n = x * x / w2 + y * y / h2 + z * z / d2
+                let n2 = x * x / w3 + y * y / h3 + z * z / d3
+                if (n < 1 && n2 >= 1) {
+                    world.setBlock(px + x, py + y, pz + z, id)
+					await sleep(10)
+                }
+            }
+        }
+    }
+}
+-->
