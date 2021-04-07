@@ -4592,15 +4592,6 @@ function MineKhan() {
 
 	var multiplayer = null
 	async function loggedIn() {
-		let exists = await fetch("login.html").then(res => res.text()).catch(e => 401)
-		if (!exists || exists === "401") {
-			if (location.href.startsWith("file")) {
-				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
-			} else {
-				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
-			}
-			return false
-		}
 		return true
 	}
 
