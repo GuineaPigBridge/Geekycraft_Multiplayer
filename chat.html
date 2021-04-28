@@ -4662,7 +4662,7 @@ function Geekycraft() {
 	let playerEntities = {}
 	let playerDistances = []
 	async function loggedIn() {
-		let exists = await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.text()).catch(e => 401)
+		let exists = await fetch("https://geekycraft-multiplayer.herokuapp.com/README.md").then(res => res.text()).catch(e => 401)
 		if (!exists || exists === "401") {
 			if (location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com")) {
 				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
