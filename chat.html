@@ -4825,7 +4825,6 @@ function Geekycraft() {
 				    chunk.setBlock(i, gen, k, blockIds.Water);
 
 				}
-				for (let k = 0; k < 16; k++) {
 					biome = superflat ? 0 : Math.round(noise((trueX + i) * biomeSmooth, (trueZ + k) * biomeSmooth));
 					gen = superflat ? 4 : Math.round(noise((trueX + i) * smoothness, (trueZ + k) * smoothness) * hilliness) + generator.extra
 					chunk.tops[k * 16 + i] = gen
@@ -4850,6 +4849,7 @@ function Geekycraft() {
 				chunk.setBlock(i, gen - 3, k, blockIds.dirt);
 
 			    }
+
 					for (let j = 1; j < gen - 3; j++) {
 						chunk.setBlock(i, j, k, blockIds.stone)
 					}
