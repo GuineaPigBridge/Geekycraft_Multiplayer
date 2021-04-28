@@ -1021,7 +1021,7 @@ function Geekycraft() {
 			perm.copyWithin(0x100, 0x0, 0x100);
 		}
 	}
-		noise(x, y, z) {
+		function noise(x, y, z) {
 			let generator = noiseProfile.generator
 			let effect = 1, k = 1, sum = 0
 			for(let i = 0; i < noiseProfile.octaves; ++i) {
