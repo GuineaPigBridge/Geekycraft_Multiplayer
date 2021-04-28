@@ -4664,9 +4664,9 @@ function MineKhan() {
 	let playerEntities = {}
 	let playerDistances = []
 	async function loggedIn() {
-		let exists = await fetch("worlds.txt").then(res => res.text()).catch(e => 401)
+		let exists = await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.text()).catch(e => 401)
 		if (!exists || exists === "401") {
-			if (location.href.startsWith("file")) {
+			if (location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com")) {
 				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
 			} else {
 				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
@@ -4769,7 +4769,7 @@ function MineKhan() {
 
 	async function getWorlds() {
 
-		return await fetch("worlds.txt").then(res => res.json())
+		return await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.json())
 	}
 
 	let fogDist = 16
@@ -5723,7 +5723,7 @@ function MineKhan() {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
 			initMultiplayerMenu()
 			changeScene("multiplayer menu")
-		}, () => !location.href.startsWith("file"), "Please visit https://willard.fun/login to enjoy multiplayer.")
+		}, () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://geekycraft-multiplayer.herokuapp.com to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
