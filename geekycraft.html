@@ -297,7 +297,8 @@ window.quota = document.getElementById("quota")
 var hoverbox = document.getElementById("onhover")
 canvas.width  = window.innerWidth
 canvas.height = window.innerHeight
-
+let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
+let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
 /* Set this text editor to max width by copying this into the JS console:
 document.getElementsByClassName("_1chbfei")[0].setAttribute('style', 'max-width: 100vw !important')
 */
@@ -6126,8 +6127,7 @@ function Geekycraft() {
 		if (p.autoBuild) {
 			text("Hyper builder enabled", 5, height - 101, 12)
 		}
-		let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
-			let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
+		
 		if (multiplayer) {
 			playerDistances.length = 0
 			let closest = Infinity
