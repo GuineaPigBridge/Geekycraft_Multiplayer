@@ -6131,7 +6131,7 @@ function Geekycraft() {
 			let closest = Infinity
 			let cname = "Yourself"
 			let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
-			let randomthing = 
+			let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
 			for (let name in playerPositions) {
 				let pos = playerPositions[name]
 				let distance = sqrt((pos.x - p2.x)*(pos.x - p2.x) + (pos.y - p2.y)*(pos.y - p2.y) + (pos.z - p2.z)*(pos.z - p2.z))
