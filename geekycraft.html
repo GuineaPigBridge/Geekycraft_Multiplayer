@@ -6130,6 +6130,8 @@ function Geekycraft() {
 			playerDistances.length = 0
 			let closest = Infinity
 			let cname = "Yourself"
+			let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
+			let randomthing = 
 			for (let name in playerPositions) {
 				let pos = playerPositions[name]
 				let distance = sqrt((pos.x - p2.x)*(pos.x - p2.x) + (pos.y - p2.y)*(pos.y - p2.y) + (pos.z - p2.z)*(pos.z - p2.z))
@@ -6139,7 +6141,7 @@ function Geekycraft() {
 				})
 				if (distance < closest) {
 					closest = distance
-					cname = name
+					cname = randomthing
 				}
 			}
 			text(`Closest player: ${cname} (${round(closest)} blocks away)`, 5, height - 113, 12)
