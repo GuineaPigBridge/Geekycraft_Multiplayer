@@ -4695,9 +4695,9 @@ function Geekycraft() {
 	let playerEntities = {}
 	let playerDistances = []
 	async function loggedIn() {
-		let exists = await fetch("https://geekycraft-multiplayer.herokuapp.com/README.md").then(res => res.text()).catch(e => 401)
+		let exists = await fetch("https://geeky-people.herokuapp.com/README.md").then(res => res.text()).catch(e => 401)
 		if (!exists || exists === "401") {
-			if (location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com")) {
+			if (location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html")) {
 				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
 			} else {
 				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
@@ -4800,7 +4800,7 @@ function Geekycraft() {
 
 	async function getWorlds() {
 
-		return await fetch("https://geekycraft-multiplayer.herokuapp.com/worlds").then(res => res.json())
+		return await fetch("https://geeky-people.herokuapp.com/worlds").then(res => res.json())
 	}
 
 	let fogDist = 16
@@ -5779,7 +5779,7 @@ function Geekycraft() {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
 			initMultiplayerMenu()
 			changeScene("multiplayer menu")
-		}, () => !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"), "Please visit https://geekycraft-multiplayer.herokuapp.com to enjoy multiplayer.")
+		}, () => !location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html"), "Please visit https://geeky-people.herokuapp.com/geekycraft.html to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
@@ -5902,7 +5902,7 @@ function Geekycraft() {
 		})
 		Button.add(width / 2, 425, 300, 40, "Open World To Public", "pause", r => {
 			initMultiplayer()
-		}, () => !!multiplayer || !location.href.startsWith("https://geekycraft-multiplayer.herokuapp.com"))
+		}, () => !!multiplayer || !location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html"))
 		Button.add(width / 2, 475, 300, 40, "Exit Without Saving", "pause", r => {
 			savebox.value = world.getSaveString()
 			if (multiplayer) {
