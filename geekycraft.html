@@ -5,7 +5,7 @@
 The "Save" button saves your world to your local browser. Nobody else can see it. However, if you're on a public or shared computer, that save may be deleted unexpectedly. So it's a good idea to keep a safe copy of your save string somewhere where it won't be deleted.
 
 To share your save with other people, copy your world string into the "loadString" variable on line 189.
-
+"
 	Controls:
 
  * Right-click (or ctrl + left-click): place block
@@ -4698,6 +4698,7 @@ function Geekycraft() {
 	async function loggedIn() {
 		alert(localStorage.getItem("login"));
 		if (localStorage.getItem("login") == false) {
+			alert("You're not logged in. Head over to https://https://geeky-people.herokuapp.com/login.html to login or register before connecting to the server.")
 			if (location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html")) {
 				alert("You're not logged in. Head over to https://https://geeky-people.herokuapp.com/login.html to login or register before connecting to the server.")
 			} else {
