@@ -118,6 +118,8 @@ loginButton.addEventListener("click", (e) => {
     if (username === "geeky_people" && password === "im_a_geek_123") {
         alert("You have successfully logged in.");
         localStorage.setItem("login") = true;
+        location.replace("https://geeky-people.herokuapp.com/index.html")
+
     } else {
         loginErrorMsg.style.opacity = 1;
               localStorage.setItem("login") = false;
