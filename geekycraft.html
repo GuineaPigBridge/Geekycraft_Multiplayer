@@ -6129,7 +6129,9 @@ function Geekycraft() {
 		if (p.autoBuild) {
 			text("Hyper builder enabled", 5, height - 101, 12)
 		}
-		
+		if (p.superman) {
+			text("super cheat activated", 5, height - 123, 12)
+		}
 		if (multiplayer) {
 			playerDistances.length = 0
 			let closest = Infinity
@@ -6395,7 +6397,10 @@ function Geekycraft() {
 				p.autoBuild = !p.autoBuild
 				updateHUD = true
 			}
-
+			if(k === "m") {
+				p.superman = !p.superman
+				updateHUD = true
+			}
 			if (k === " " && !p.spectator) {
 				if (Date.now() < p.lastJump + 400) {
 					p.flying ^= true
@@ -6403,7 +6408,10 @@ function Geekycraft() {
 					p.lastJump = Date.now()
 				}
 			}
-
+			if (p.superman) {
+			    p.jumpSpeed = 1
+			    p.sprintSpeed = 5
+			}
 			if (k === "z") {
 				p.FOV(10, 300)
 			}
@@ -6986,6 +6994,7 @@ function Geekycraft() {
 		p.lastJump = Date.now()
 		p.autoBreak = false
 		p.autoBuild = false
+		p.superman = false
 		p.flying = false
 		p.sneaking = false
 		p.spectator = false
