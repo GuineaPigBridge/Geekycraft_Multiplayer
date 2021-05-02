@@ -6472,6 +6472,10 @@ function Geekycraft() {
 		if(k === "escape" && (screen === "pause" || screen === "inventory" || screen === "options" && previousScreen === "pause") && Date.now() > unpauseDelay) {
 			play()
 		}
+		if (p.superman) {
+			    p.jumpSpeed = 0.3
+			    p.sprintSpeed = 1.5
+		}
 		if (screen === "play") {
 			if (k === "z") {
 				p.FOV(settings.fov, 300)
@@ -6981,6 +6985,7 @@ function Geekycraft() {
 		p.previousY = 70
 		p.previousZ = 8
 		p.w = 3 / 8
+		p.bright = 15
 		p.bottomH = 1.62
 		p.topH = 0.18
 		p.onGround = false
