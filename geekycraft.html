@@ -5781,7 +5781,7 @@ function Geekycraft() {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
 			initMultiplayerMenu()
 			changeScene("multiplayer menu")
-		}, () => !location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html"), "Please visit https://geeky-people.herokuapp.com/geekycraft.html to enjoy multiplayer.")
+		}, () => !localStorage.getItem("login") = true, "Please visit https://geeky-people.herokuapp.com/geekycraft.html to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
