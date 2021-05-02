@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="login-page.css">
-  <script defer src="login-page.js"></script>
 </head>
 
 <body>
@@ -117,11 +115,12 @@ loginButton.addEventListener("click", (e) => {
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    if (username === "user" && password === "web_dev") {
+    if (username === "geeky_people" && password === "im_a_geek_123") {
         alert("You have successfully logged in.");
-        location.reload();
+        localStorage.setItem("login") = true;
     } else {
         loginErrorMsg.style.opacity = 1;
+              localStorage.setItem("login") = false;
     }
 })
   </script>
