@@ -4696,8 +4696,8 @@ function Geekycraft() {
 	let playerEntities = {}
 	let playerDistances = []
 	async function loggedIn() {
-		alert(localStorage.getItem("login"));
 		if (localStorage.getItem("login") == false) {
+			console.log('not logged')
 			alert("You're not logged in. Head over to https://https://geeky-people.herokuapp.com/login.html to login or register before connecting to the server.")
 			if (location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html")) {
 				alert("You're not logged in. Head over to https://https://geeky-people.herokuapp.com/login.html to login or register before connecting to the server.")
