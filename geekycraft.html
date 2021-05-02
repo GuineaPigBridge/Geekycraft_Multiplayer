@@ -5768,6 +5768,7 @@ function Geekycraft() {
 
 	var initEverything
 	function initButtons() {
+		let login = localStorage.getItem("login")
 		Button.all = []
 		Slider.all = []
 		const nothing = () => false
@@ -5781,7 +5782,7 @@ function Geekycraft() {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
 			initMultiplayerMenu()
 			changeScene("multiplayer menu")
-		}, () => !localStorage.getItem("login") = true, "Please visit https://geeky-people.herokuapp.com/geekycraft.html to enjoy multiplayer.")
+		}, () => login = false, "Please visit https://geeky-people.herokuapp.com/geekycraft.html to enjoy multiplayer.")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
 
 		// Creation menu buttons
