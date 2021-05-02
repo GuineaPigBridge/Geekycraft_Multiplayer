@@ -4697,11 +4697,11 @@ function Geekycraft() {
 	let playerDistances = []
 	async function loggedIn() {
 		let exists = await fetch("https://willard.fun/profile/").then(res => res.text()).catch(e => 401)
-		if (!exists || exists === "401") {
+		if (localStorage.getItem("login") == false) {
 			if (location.href.startsWith("https://geeky-people.herokuapp.com/geekycraft.html")) {
-				alert("You're not logged in. Head over to https://willard.fun/login to login or register before connecting to the server.")
+				alert("You're not logged in. Head over to https://https://geeky-people.herokuapp.com/login.html to login or register before connecting to the server.")
 			} else {
-				alert("Multiplayer is currently only available on https://willard.fun/login => https://willard.fun/minekhan")
+				alert("Multiplayer is currently only available on https://geeky-people.herokuapp.com/geekycraft.html")
 			}
 			return false
 		}
