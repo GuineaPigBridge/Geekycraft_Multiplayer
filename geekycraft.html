@@ -297,8 +297,7 @@ window.quota = document.getElementById("quota")
 var hoverbox = document.getElementById("onhover")
 canvas.width  = window.innerWidth
 canvas.height = window.innerHeight
-let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
-let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
+
 /* Set this text editor to max width by copying this into the JS console:
 document.getElementsByClassName("_1chbfei")[0].setAttribute('style', 'max-width: 100vw !important')
 */
@@ -4754,6 +4753,8 @@ function Geekycraft() {
 			} else if (packet.type === "pos") {
 				let pos = packet.data
 				let name = packet.author
+				let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
+				let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
 				playerPositions[name] = pos
 				if (!playerEntities[name]) playerEntities[name] = new Player(pos.x, pos.y, pos.z, abs(name.hashCode()) % 80 + 1)
 				let ent = playerEntities[name]
@@ -6409,8 +6410,9 @@ function Geekycraft() {
 				}
 			}
 			if (p.superman) {
-			    p.jumpSpeed = 1
-			    p.sprintSpeed = 5
+			    p.jumpSpeed = 0.5
+			    p.flySpeed = 1
+			    p.sprintSpeed = 7
 			}
 			if (k === "z") {
 				p.FOV(10, 300)
@@ -6475,6 +6477,7 @@ function Geekycraft() {
 		if (p.superman) {
 			    p.jumpSpeed = 0.3
 			    p.sprintSpeed = 1.5
+			    p.flySpeed = 2.5
 		}
 		if (screen === "play") {
 			if (k === "z") {
