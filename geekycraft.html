@@ -303,6 +303,8 @@ document.getElementsByClassName("_1chbfei")[0].setAttribute('style', 'max-width:
 */
 function Geekycraft() {
 	// cache Math object
+	let randomitems = "Other player"
+	let randomthing = "Other player"
 	const { Math, performance, Date } = window;
 	const { cos, sin, round, floor, ceil, min, max, abs, sqrt } = Math;
 
@@ -4753,8 +4755,8 @@ function Geekycraft() {
 			} else if (packet.type === "pos") {
 				let pos = packet.data
 				let name = packet.author
-				let randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
-				let randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
+				randomitems = ['Not Mr Beast', 'Grizelda a cow', 'AnimeBoy', '🔺▶🔺Ⓜ️', 'Technoblade', 'TommyInit','Codeboy'];
+				randomthing = randomitems[Math.floor(Math.random() * randomitems.length)];
 				playerPositions[name] = pos
 				if (!playerEntities[name]) playerEntities[name] = new Player(pos.x, pos.y, pos.z, abs(name.hashCode()) % 80 + 1)
 				let ent = playerEntities[name]
