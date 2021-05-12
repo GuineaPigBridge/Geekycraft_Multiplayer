@@ -4687,7 +4687,7 @@ function Geekycrraft() {
 			target = world.id
 			host = true
 		}
-		multiplayer = new WebSocket("wss://car.pakastin.fi?target=" + target)
+		multiplayer = new WebSocket("https://car.pakastin.fi?target=" + target)
 		multiplayer.onopen = event => {
 			multiplayer.send(JSON.stringify({
 				type: "connect"
