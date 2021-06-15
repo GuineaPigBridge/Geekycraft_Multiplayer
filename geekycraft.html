@@ -71,7 +71,7 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 	<head>
 		<meta charset="utf-8">
 		<title>Geekycraft</title>
-    <base href="https://Geekycraft.thingmaker.repl.co">
+    <base href="https://geeky-people.herokuapp.com/geekycraft.html">
     <!--Metadata-->
     <meta name="keywords" content="Geekycraft"> <!--search "Geekycraft" on Google-->
     <meta name="description" content="Geekycraft with survival and nether and many more features">
@@ -8697,7 +8697,7 @@ class Generator {
   
   function login(){
     return new Promise((resolve, reject) => {
-      var w = open("https://www.thingmaker.repl.co/website/login.html", "_blank","width=100")
+      var w = open("https://www.guineapigbridge.repl.co/website/login.html", "_blank","width=100")
       function onmsg(event){
         if (event.source !== w) return;
         if (event.data.startsWith("logged:")){
@@ -8718,12 +8718,12 @@ class Generator {
   win.username = ""
   async function loggedIn(){
     var logged = false;
-    await fetch("https://server.thingmaker.repl.co/getuser", {credentials:"include"}).then(r => r.text()).then(r => logged=r)
+    await fetch("https://server.guineapigbridge.repl.co/getuser", {credentials:"include"}).then(r => r.text()).then(r => logged=r)
     if(logged){
       username = logged
       return logged
     }else{
-      if(confirm("Your not logged in. Head over to www.thingmaker.repl.co/login.html to login.")){
+      if(confirm("Your not logged in. Head over to https://www.guineapigbridge.repl.co/website/login.html to login.")){
         var logged
         await login().then(r => logged=r).catch(r => logged=r)
         if(logged){
@@ -8741,7 +8741,7 @@ class Generator {
       return []
     }
     var worlds
-    await fetch("https://server.thingmaker.repl.co/worlds").then(r => r.json()).then(r => worlds=r)
+    await fetch("https://server.guineapigbridge.repl.co/worlds").then(r => r.json()).then(r => worlds=r)
     return worlds
   }
   var multiplayer = null
@@ -8780,7 +8780,7 @@ class Generator {
       host = true
     }
     players = {} //empty
-    multiplayer = new WebSocket("wss://server.thingmaker.repl.co/ws?target="+target)
+    multiplayer = new WebSocket("wss://server.guineapigbridge.repl.co/ws?target="+target)
     multiplayer.onopen = e => {
 			/*multiplayer.send(JSON.stringify({
         "auth": achexUsername,
@@ -12120,7 +12120,7 @@ class Generator {
 	}
   let marketplace = {}; win.marketplaceData = null
   async function initMarketplace(){
-    marketplaceData = await fetch("https://Geekycraft.thingmaker.repl.co/maps.json")
+    marketplaceData = await fetch("https://geeky-people.herokuapp.com/maps.json")
     await new Promise((resolve, reject) => {
       marketplaceData.text().then(r => {marketplaceData = JSON.parse(r); resolve()})
     })
@@ -12711,7 +12711,7 @@ class Generator {
       "Multiplayer!",
       "Survival!",
       "Flowers? Make a garden!",
-      "Also go to my website: www.thingmaker.repl.co",
+      "HOW DID YOU COME TO THIS CRAPPY WEBSITE?",
       "Nether!",
       "Can't break bedrock."
     ]
@@ -13240,7 +13240,7 @@ function explode(x,y,z, radius){
   explodeSound(x,y,z)
 }
 
-if (("serviceWorker" in navigator) && location.origin === "https://Geekycraft.thingmaker.repl.co") {
+if (("serviceWorker" in navigator) && location.origin === "https://geeky-people.herokuapp.com/geekycraft.html") {
   window.addEventListener("load", function() {
     navigator.serviceWorker
       .register("/sw.js")
