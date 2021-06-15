@@ -12120,7 +12120,7 @@ class Generator {
 	}
   let marketplace = {}; win.marketplaceData = null
   async function initMarketplace(){
-    marketplaceData = await fetch("https://geeky-people.herokuapp.com/maps.json")
+    marketplaceData = await fetch("https://geeky-people.herokuapp.com/index.json")
     await new Promise((resolve, reject) => {
       marketplaceData.text().then(r => {marketplaceData = JSON.parse(r); resolve()})
     })
