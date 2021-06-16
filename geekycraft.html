@@ -40,8 +40,6 @@ To share your save with other people, copy your world string into the "loadStrin
 
 	To-Do:
  * A lot. Check out the GitHub repo if you'd like to collaborate on this. Must use Discord.
- * https://github.com/Willard21/Geekycraft
-
 
 	How it works:
 
@@ -8542,7 +8540,7 @@ class Generator {
     }
   }
   window.Player = Character
-  
+  var logged = false;
   //People, if you want cows, you need to put this in the console: world.entities.push(new Cow(p2.x, p2.y, p2.z))
   //I'm probaly not going to keep working on this.
   //Too hard
@@ -8717,7 +8715,6 @@ class Generator {
   var achexUsername = "player"+Date.now()
   win.username = ""
   async function loggedIn(){
-    var logged = false;
     await fetch("https://server.guineapigbridge.repl.co/getuser", {credentials:"include"}).then(r => r.text()).then(r => logged=r)
     if(logged){
       username = logged
@@ -10264,7 +10261,7 @@ class Generator {
 		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
       changeScene("multiplayer menu")
       initServersMenu()
-    }, null, "If you want multiplayer, why don't you head over to willard.fun/Geekycraft?")
+    }, null, "If you want multiplayer, why don't you contact your friends?")
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
     Button.add(width / 2, height / 2 + 145, 400, 40, "Marketplace", "main menu", r => changeScene("marketplace"))
 
@@ -11139,7 +11136,6 @@ class Generator {
 	document.onmousemove = trackMouse
   
   //added by me from mobile test Geekycraft
-	//https://www.khanacademy.org/computer-programming/mobile-test-Geekycraft/5100360783052800
 	let pTouch = {x: -100, y: 0};
 	canvas.addEventListener("touchstart", function(e) {
 	    pTouch.x = e.changedTouches[0].pageX;
