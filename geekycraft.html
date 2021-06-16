@@ -104,6 +104,8 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 			background-color: RGBA(0, 0, 0, 0.6);
 			justify-content: center;
 			margin: 0 auto;
+		}.buttons{
+		overflow-y: auto;
 		}
 		.world {
 			width: 250px;
@@ -120,10 +122,7 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 		strong {
 			color: white;
 		}
-		button{
-			height: 2em;
-			width: 7em
-		}
+
 		.selected {
 			border: 3px solid white;
 			padding: 3px;
@@ -10280,8 +10279,8 @@ class Generator {
     Button.add(width / 2, height / 2 + 145, 400, 40, "Marketplace", "main menu", r => changeScene("marketplace"))
 
 		// Creation menu buttons
-		Button.add(width / 2, 135, 300, 40, ["World Type: Normal", "World Type: Superflat", "World Type: Island"], "creation menu", r => {superflat = r === "World Type: Superflat"; if(r==="World Type: Island")superflat="island"})
-		Button.add(width / 2, 185, 300, 40, ["Trees: On", "Trees: Off"], "creation menu", r => trees = r === "Trees: On", function() {
+		Button.add(width / 2, 135, width, height/15, ["World Type: Normal", "World Type: Superflat", "World Type: Island"], "creation menu", r => {superflat = r === "World Type: Superflat"; if(r==="World Type: Island")superflat="island"})
+		Button.add(width / 2, 185, width, height/15, ["Trees: On", "Trees: Off"], "creation menu", r => trees = r === "Trees: On", function() {
 			if (superflat === true) {
 				this.index = 1
 				trees = false
