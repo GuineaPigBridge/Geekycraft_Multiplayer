@@ -280,6 +280,7 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
       <button id="controlSpace">space</button>
       <br>
       <button id="controlShift">shift</button>
+      <button id="controlItems">Items</button>
     </div>
     <!--<div id="buttonsTop">
       <button id="controlPause">Pause</button>
@@ -418,6 +419,7 @@ window.onscreenControls={
     d:document.getElementById("controlD"),
     " ":document.getElementById("controlSpace"),
     "shift":document.getElementById("controlShift"),
+    "e":document.getElementById("controlItems"),
 }
 window.onscreenControl_Element = document.getElementById("onscreenControls")
 canvas.width  = window.innerWidth
@@ -10271,10 +10273,12 @@ class Generator {
 
 		// Main menu buttons
 		Button.add(width / 2, height / 2 - 20, 400, 40, "Singleplayer", "main menu", r => changeScene("loadsave menu"))
-		Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
+if(!touchScreen){		
+Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r => {
       changeScene("multiplayer menu")
       initServersMenu()
     }, null, "If you want multiplayer, why don't you contact your friends?")
+}
 		Button.add(width / 2, height / 2 + 90, 400, 40, "Options", "main menu", r => changeScene("options"))
     Button.add(width / 2, height / 2 + 145, 400, 40, "Marketplace", "main menu", r => changeScene("marketplace"))
 		
@@ -10476,6 +10480,7 @@ class Generator {
     }
 
 		// Pause buttons
+    if(!touchScreen){
 		Button.add(width / 2, 225, 300, 40, "Resume", "pause", play)
 		Button.add(width / 2, 275, 300, 40, "Options", "pause", r => changeScene("options"))
 		Button.add(width / 2, 325, 300, 40, "Save", "pause", save, nothing, () => `Save the world to your computer/browser. Doesn't work in incognito.\n\nLast saved ${timeString(Date.now() - world.edited)}.`)
@@ -10497,7 +10502,17 @@ class Generator {
 			  initMultiplayer()
       }
 		}, () => multiplayer)
-    
+  }if(touchScreen){
+    Button.add(width / 2, 225, 300, 40, "Resume", "pause", play)
+		Button.add(width / 2, 275, 300, 40, "Options", "pause", r => changeScene("options"))
+		Button.add(width / 2, 325, 300, 40, "Save", "pause", save, nothing, () => `Save the world to your computer/browser. Doesn't work in incognito.\n\nLast saved ${timeString(Date.now() - world.edited)}.`)
+    Button.add(width / 2, 375, 300, 40, "Exit Without Saving", "pause", r => {
+			savebox.value = world.getSaveString()
+			initWorldsMenu()
+      if(multiplayer) multiplayer.close()
+			changeScene("main menu")
+		})
+  }
     // You Died buttons
     Button.add(width / 2, 225, 300, 40, "Respawn", "dead", r => {
       let spawn = world.spawnPoint
@@ -12909,6 +12924,10 @@ class Generator {
       }
       
       if(mouseDown && touchScreen){
+        changeWorldBlock(0)
+        if(p.sneaking){
+          newWorldBlock()
+        }
 			  ctx.beginPath()
         fill(255)
         strokeWeight(2)
