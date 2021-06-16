@@ -104,8 +104,8 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 			background-color: RGBA(0, 0, 0, 0.6);
 			justify-content: center;
 			margin: 0 auto;
-		}.buttons{
-		overflow-y: auto;
+		}canvas{
+		user-select: none
 		}
 		.world {
 			width: 250px;
@@ -419,7 +419,6 @@ window.onscreenControls={
     d:document.getElementById("controlD"),
     " ":document.getElementById("controlSpace"),
     "shift":document.getElementById("controlShift"),
-    "e":document.getElementById("controlItems"),
 }
 window.onscreenControl_Element = document.getElementById("onscreenControls")
 canvas.width  = window.innerWidth
@@ -465,7 +464,7 @@ function Geekycraft() {
 		grassSide: n => {
 			const pix = getPixels("0g0g70ordrzz0u30g730wa4vzz0xnyl8f11lrk7315qj7jz1fh47pb6553365533033636350335403653650063306333633300635163503655353653535605335031350330553500033033366333433663663535336655335055335553353530355333033503300333336635353663650660554353355635155305303053556333333366353323553060365553063030663533555365534355335530");
 
-			for (let i = 0; i < pix.length; i += 4) {
+			for (let i = 0; i < pix.length;F i += 4) {
 				setPixel(n, i >> 2 & 15, i >> 6, pix[i], pix[i + 1], pix[i + 2], pix[i + 3]);
 			}
 
@@ -12924,8 +12923,10 @@ Button.add(width / 2, height / 2 + 35, 400, 40, "Multiplayer", "main menu", r =>
       }
       
       if(mouseDown && touchScreen){
+	if(&& p.lastBreak < Date.now()){
         changeWorldBlock(0)
-        if(p.sneaking){
+	}
+        if(k === "shift" && p.lastPlace < Date.now()){
           newWorldBlock()
         }
 			  ctx.beginPath()
