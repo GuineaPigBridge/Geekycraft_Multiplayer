@@ -1138,6 +1138,15 @@ function Geekycraft() {
       digSound: ["block.grass.dig1", "block.grass.dig2", "block.grass.dig3", "block.grass.dig4"],
       stepSound: ["block.grass.step1", "block.grass.step2","block.grass.step3","block.grass.step4","block.grass.step5","block.grass.step6"]
 		},
+		{
+      name: "light",
+      solid:false,
+      shadow: false,
+      transparent:true,
+      lightLevel: 11,
+      textures: "",
+      glassSound: true
+    },
     {
       name: "portal",
       solid:false,
@@ -1153,11 +1162,11 @@ function Geekycraft() {
           if(world.type === "nether"){
             world = dimensions.overworld
             //world.loadSave(world.getSaveString())
-            //changeScene("loading")
+            changeScene("loading")
           }else{
             world = dimensions.nether
             //world.loadSave(world.getSaveString())
-            //changeScene("netherLoading")
+            changeScene("netherLoading")
           }
         }
       },
