@@ -280,6 +280,7 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
       <button id="controlSpace">space</button>
       <br>
       <button id="controlShift">shift</button>
+      <button id="controlItems">Items</button>
     </div>
     <!--<div id="buttonsTop">
       <button id="controlPause">Pause</button>
@@ -12926,13 +12927,13 @@ if(touchScreen){
       }
       
       if(mouseDown && touchScreen){
-	if(p.lastBreak < Date.now()-250){
+		if(p.lastBreak < Date.now()-250){
         changeWorldBlock(0)
-	}
-        if(k === "shift" && p.lastPlace < Date.now()){
+		}
+        if(p.sneaking && p.lastPlace < Date.now()){
           newWorldBlock()
         }
-			  ctx.beginPath()
+		ctx.beginPath()
         fill(255)
         strokeWeight(2)
         ellipse(pTouch.x, pTouch.y, 70,70)
