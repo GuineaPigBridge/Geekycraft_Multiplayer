@@ -12946,7 +12946,7 @@ if(touchScreen){
 		if (p.lastBreak < Date.now() - 250 && screen === "play" && !survival && p.onGround) { // if survival breaking isn't instant
 			changeWorldBlock(0)
 		}
-		else if (p.lastPlace < Date.now()-250) {
+		else if (p.lastPlace < Date.now()-250&& screen === "play" && !survival && !p.onGround) {
 			newWorldBlock()
 		}
 		ctx.beginPath()
