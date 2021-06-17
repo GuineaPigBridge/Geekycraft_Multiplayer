@@ -3043,6 +3043,8 @@ ROTATION = 0x1800 // Mask for the direction bits
 			onenter: () => {
 				if(!touchScreen){
 				window.boxCenterTop.placeholder = "Enter Save String (Optional)"
+				}if(touchScreen){
+				window.boxCenterTop.style.display = "none"
 				}
 				if (navigator && navigator.storage && navigator.storage.estimate) {
 					navigator.storage.estimate().then(data => {
@@ -3073,6 +3075,7 @@ ROTATION = 0x1800 // Mask for the direction bits
 			enter: [window.boxCenterTop],
 			exit: [window.boxCenterTop],
 			onenter: () => {
+				window.boxCenterTop.style.display = "block"
 				window.boxCenterTop.placeholder = "Enter World Name"
 				window.boxCenterTop.value = ""
 			}
@@ -5940,8 +5943,8 @@ ROTATION = 0x1800 // Mask for the direction bits
 
 		if (!p.flying) {
       if (liquid){
-        //p.jumpSpeed = 0.135;
-        p.gravityStength = -0.01;
+        p.jumpSpeed = 0.135;
+        p.gravityStength = -0.001;
         if (Key[" "] || Key.w || Key.a || Key.s || Key.d){
           p.velocity.y += 0.006
         }
@@ -12940,11 +12943,12 @@ if(touchScreen){
       }
       
       if(mouseDown && touchScreen){
-		if (p.lastBreak < Date.now() - 250 && screen === "play" && !survival) { // if survival breaking isn't instant
+		if (p.lastBreak < Date.now() - 250 && screen === "play" && !survival && p.onGround) { // if survival breaking isn't instant
 			changeWorldBlock(0)
 		}
-		if (Key.shift && p.lastPlace < Date.now() - 250 && !p.autoBuild) {
-				newWorldBlock()
+	      	
+		if (p.lastPlace < Date.now()-250) {
+			newWorldBlock()
 		}
 		ctx.beginPath()
         fill(255)
