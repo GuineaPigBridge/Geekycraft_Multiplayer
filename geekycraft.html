@@ -433,7 +433,7 @@ canvas.width  = window.innerWidth
 canvas.height = window.innerHeight
 window.loader = document.getElementById("loader")
 
-let touchScreen = true
+let touchScreen = "ontouchstart" in document
 if(!touchScreen) onscreenControl_Element.style.display = "none"
 function Geekycraft() {
 	// cache Math object
