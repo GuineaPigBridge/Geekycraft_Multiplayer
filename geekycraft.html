@@ -83,9 +83,17 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 	<style>
 		body {
 			overflow: hidden; /* Hide scrollbars */
+			-webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
 		}
     button, #onscreenControls, canvas{
 		  /*get rid of user select*/
+		  font-family: 'VT323', 'Courier New', Courier, monospace;
 			-webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
@@ -128,6 +136,7 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
 			padding: 3px;
 		}
 		input[type=text] {
+			font-family: 'VT323', 'Courier New', Courier, monospace;
 			background-color: black;
 			caret-color: white;
 			border: 2px solid gray;
@@ -280,7 +289,6 @@ This isn't entirely necessary, but it's considered best practice. Some OpenGL ES
       <button id="controlSpace">space</button>
       <br>
       <button id="controlShift">shift</button>
-      <button id="controlItems">Items</button>
     </div>
     <!--<div id="buttonsTop">
       <button id="controlPause">Pause</button>
@@ -12927,12 +12935,12 @@ if(touchScreen){
       }
       
       if(mouseDown && touchScreen){
-		if(p.lastBreak < Date.now()-250){
-        changeWorldBlock(0)
+		if (p.lastBreak < Date.now() - 250 && screen === "play" && !survival) { // if survival breaking isn't instant
+			changeWorldBlock(0)
 		}
-        if(p.sneaking && p.lastPlace < Date.now()){
-          newWorldBlock()
-        }
+		if (Key.shift && p.lastPlace < Date.now() - 250 && !p.autoBuild) {
+				newWorldBlock()
+		}
 		ctx.beginPath()
         fill(255)
         strokeWeight(2)
