@@ -433,7 +433,7 @@ canvas.width  = window.innerWidth
 canvas.height = window.innerHeight
 window.loader = document.getElementById("loader")
 
-let touchScreen = "ontouchstart" in document
+let touchScreen = true
 if(!touchScreen) onscreenControl_Element.style.display = "none"
 function Geekycraft() {
 	// cache Math object
@@ -11292,7 +11292,7 @@ if(touchScreen){
 					}
 				}
 				holding = inventory.hotbar[inventory.hotbarSlot].id
-				if(e.button === 2 && holding) {
+				if(e.butt on === 2 && holding) {
 					place = true
 				}
 				if(place) {
@@ -12946,8 +12946,7 @@ if(touchScreen){
 		if (p.lastBreak < Date.now() - 250 && screen === "play" && !survival && p.onGround) { // if survival breaking isn't instant
 			changeWorldBlock(0)
 		}
-	      	
-		if (p.lastPlace < Date.now()-250) {
+		else if (p.lastPlace < Date.now()-250) {
 			newWorldBlock()
 		}
 		ctx.beginPath()
