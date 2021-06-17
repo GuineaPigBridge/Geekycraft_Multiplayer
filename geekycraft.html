@@ -3041,13 +3041,16 @@ ROTATION = 0x1800 // Mask for the direction bits
 			enter: [window.worlds, window.boxCenterTop, window.quota],
 			exit: [window.worlds, window.boxCenterTop, window.quota],
 			onenter: () => {
+				if(!touchScreen){
 				window.boxCenterTop.placeholder = "Enter Save String (Optional)"
+				}
 				if (navigator && navigator.storage && navigator.storage.estimate) {
 					navigator.storage.estimate().then(data => {
 						window.quota.innerText = `${data.usage.toLocaleString()} / ${data.quota.toLocaleString()} bytes (${(100 * data.usage / data.quota).toLocaleString(undefined, { maximumSignificantDigits: 2 })}%) of your quota used`
 					}).catch(console.error)
 				}
-				window.boxCenterTop.onmousedown = e => {
+				if(!touchScreen){
+					window.boxCenterTop.onmousedown = e => {
 					let elem = document.getElementsByClassName("selected")
 					if (elem && elem[0]) {
 						elem[0].classList.remove("selected")
@@ -3055,6 +3058,8 @@ ROTATION = 0x1800 // Mask for the direction bits
 					selectedWorld = 0
 					Button.draw()
 				}
+				}
+				
 			},
 			onexit: () => {
 				window.boxCenterTop.onmousedown = null
