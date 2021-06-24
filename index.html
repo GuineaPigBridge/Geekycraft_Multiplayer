@@ -1,863 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEEKYPEOPLE</title>
-  <link rel="shortcut icon" type="image/ico" href="profilepicturev2.jfif">
-
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links
-  $("a").on('click', function(event) {
-
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-});
-</script>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap');
-
-:root {
-  --color-black: #000;
-  --color-gray: #f0f0f0;
-  --color-white: #fff;
-  --color-blue: #1b62b9;
-  --color-dark-blue: #144c90;
-  --color-red: #e63838;
-  --color-dark-red: #a22929;
-  --color-yellow: #ffea64;
-  --color-dark-yellow: #fddd50;
-  --color-peach: #fc9;
-  --font-family: 'Rubik', sans-serif;
-  --font-size-h1: 7.5rem;
-  --font-size-h2: 2.5rem;
-  --font-size-h3: 1.875rem;
-  --font-size-h4: 1.375rem;
-  --font-size-text: 1.125rem;
-  --font-weight-regular: 400;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-  --header-text-shadow: -1px -1px 0 var(--color-black), 0 -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px  0 0 var(--color-black), 1px  0 0 var(--color-black), -1px  1px 0 var(--color-black), 0  1px 0 var(--color-black), 1px  1px 0 var(--color-black), -2px -2px 0 var(--color-black), -1px -2px 0 var(--color-black), 0 -2px 0 var(--color-black), 1px -2px 0 var(--color-black), 2px -2px 0 var(--color-black), 2px -1px 0 var(--color-black), 2px  0 0 var(--color-black), 2px  1px 0 var(--color-black), 2px  2px 0 var(--color-black), 1px  2px 0 var(--color-black), 0  2px 0 var(--color-black), -1px  2px 0 var(--color-black), -2px  2px 0 var(--color-black), -2px  1px 0 var(--color-black), -2px  0 0 var(--color-black), -2px -1px 0 var(--color-black), -3px -3px 0 var(--color-black), -2px -3px 0 var(--color-black), 0 -3px 0 var(--color-black), 2px -3px 0 var(--color-black), 3px -3px 0 var(--color-black), 3px -2px 0 var(--color-black), 3px  0 0 var(--color-black), 3px  2px 0 var(--color-black), 3px  3px 0 var(--color-black), 2px  3px 0 var(--color-black), 0  3px 0 var(--color-black), -2px  3px 0 var(--color-black), -3px  3px 0 var(--color-black), -3px  2px 0 var(--color-black), -3px  0 0 var(--color-black), -3px -2px 0 var(--color-black), -3px -3px 0 var(--color-black), -1px -3px 0 var(--color-black), 0 -3px 0 var(--color-black), 1px -3px 0 var(--color-black), 3px -3px 0 var(--color-black), 3px -1px 0 var(--color-black), 3px  0 0 var(--color-black), 3px  1px 0 var(--color-black), 3px  3px 0 var(--color-black), 1px  3px 0 var(--color-black), 0  3px 0 var(--color-black), -1px  3px 0 var(--color-black), -3px  3px 0 var(--color-black), -3px  1px 0 var(--color-black), -3px  0 0 var(--color-black), -3px -1px 0 var(--color-black), -3px 4px 0 var(--color-black), 0px 4px 0 var(--color-black), 3px 4px 0 var(--color-black), -3px 5px 0 var(--color-black), 0px 5px 0 var(--color-black), 3px 5px 0 var(--color-black), -3px 6px 0 var(--color-black), 0px 6px 0 var(--color-black), 3px 6px 0 var(--color-black), -3px 7px 0 var(--color-black), 0px 7px 0 var(--color-black), 3px 7px 0 var(--color-black), -3px 8px 0 var(--color-black), 0px 8px 0 var(--color-black), 3px 8px 0 var(--color-black), -3px 9px 0 var(--color-black), 0px 9px 0 var(--color-black), 3px 9px 0 var(--color-black), -3px 10px 0 var(--color-black), 0px 10px 0 var(--color-black), 3px 10px 0 var(--color-black), -3px 11px 0 var(--color-black), 0px 11px 0 var(--color-black), 3px 11px 0 var(--color-black), -3px 12px 0 var(--color-black), 0px 12px 0 var(--color-black), 3px 12px 0 var(--color-black), -3px 13px 0 var(--color-black), 0px 13px 0 var(--color-black), 3px 13px 0 var(--color-black), -3px 14px 0 var(--color-black), 0px 14px 0 var(--color-black), 3px 14px 0 var(--color-black), -3px 15px 0 var(--color-black), 0px 15px 0 var(--color-black), 3px 15px 0 var(--color-black), -3px 16px 0 var(--color-black), 0px 16px 0 var(--color-black), 3px 16px 0 var(--color-black), -3px 17px 0 var(--color-black), 0px 17px 0 var(--color-black), 3px 17px 0 var(--color-black), -3px 18px 0 var(--color-black), 0px 18px 0 var(--color-black), 3px 18px 0 var(--color-black);
-  --link-text-shadow: -1px -1px 0 var(--color-black), 0 -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px  0 0 var(--color-black), 1px  0 0 var(--color-black), -1px  1px 0 var(--color-black), 0  1px 0 var(--color-black), 1px  1px 0 var(--color-black), -2px -2px 0 var(--color-black), -1px -2px 0 var(--color-black), 0 -2px 0 var(--color-black), 1px -2px 0 var(--color-black), 2px -2px 0 var(--color-black), 2px -1px 0 var(--color-black), 2px  0 0 var(--color-black), 2px  1px 0 var(--color-black), 2px  2px 0 var(--color-black), 1px  2px 0 var(--color-black), 0  2px 0 var(--color-black), -1px  2px 0 var(--color-black), -2px  2px 0 var(--color-black), -2px  1px 0 var(--color-black), -2px  0 0 var(--color-black), -2px -1px 0 var(--color-black);
-}
-
-/*
- * [Modified] Modern CSS Reset
- * @link https://github.com/hankchizljaw/modern-css-reset
-*/
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Remove default margin */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+		body {
   margin: 0;
-	  scroll-behavior: smooth;
-
-}
-
-html {
-  overflow-x: hidden;
-}
-
-/* Set core body defaults */
-body {
-scroll-behavior: smooth;
-
-  min-height: 100vh;
-  font-size: 100%;
-  line-height: 1.5;
-  text-rendering: optimizeSpeed;
-  overflow-x: hidden;
-}
-
-/* Make images easier to work with */
-img {
-  display: block;
-  max-width: 100%;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Remove all animations and transitions for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-body {
-  color: var(--color-black);
-  font-family: var(--font-family);
-  font-size: var(--font-size-text);
-  font-weight: var(--font-weight-regular);
-  background-color: var(--color-yellow);
-  background-image: radial-gradient(var(--color-dark-yellow) 20%, transparent 0), radial-gradient(var(--color-dark-yellow) 20%, transparent 0);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-}
-
-:focus {
-  outline: 2px dotted;
-  outline-offset: 0.125rem;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 0.65em;
-  font-weight: var(--font-weight-extrabold);
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-h1 {
-  font-size: var(--font-size-h1);
-  font-size: clamp(4.25rem, 10vw, var(--font-size-h1));
-  color: var(--color-black);
-}
-
-h2,
-.profile h4 {
-  font-size: var(--font-size-h2);
-  font-size: clamp(2.375rem, 5vw, var(--font-size-h2));
-}
-
-h3 {
-  font-size: var(--font-size-h3);
-}
-
-h4 {
-  font-size: var(--font-size-h4);
-}
-
-p {
-  margin: 0 0 1rem;
-}
-
-strong {
-  font-weight: var(--font-weight-bold);
-}
-
-a {
-  position: relative;
-  color: var(--color-black);
-  font-weight: var(--font-weight-extrabold);
-  text-decoration-thickness: 0.125em;
-  text-underline-offset: 0.0875em;
-  text-transform: uppercase;
-}
-
-blockquote {
-  position: relative;
-  margin: 1rem 0 2rem;
-  padding: 0;
-  color: var(--color-black);
-  border: 0.25rem solid var(--color-black);
-  background-color: var(--color-white);
-}
-
-blockquote p {
-  position: relative;
-  margin-bottom: 0;
-  padding: 2.5rem 1rem 1.5rem;
-  font-size: var(--font-size-h4);
-}
-
-blockquote p strong {
-  position: absolute;
-  top: -0.25rem;
-  left: -0.25rem;
-  padding: 0.25em 1em;
-  color: var(--color-white);
-  font-size: 1rem;
-  text-transform: uppercase;
-  background-color: var(--color-black);
-}
-
-main h2,
-.profile h4,
-#styles h2 {
-  align-self: center;
-  margin-top: -3.75rem;
-  padding: 0.25em 0.5em;
-  color: var(--color-white);
-  font-weight: var(--font-weight-bold);
-  background-color: var(--color-black);
-  transform: skewX(-10deg) rotate(-2deg);
-  text-align: center;
-}
-
-article .container > ul:not(.features) > li + li,
-article .container > ol > li + li {
-  margin-top: 1rem;
-}
-
-article .container * + h2 {
-  margin-top: 4rem;
-}
-
-nav ul,
-article .container,
-aside .container {
-  box-shadow: 0.5rem 0.5rem rgba(132, 81, 61, 0.35);
-}
-
-article .container,
-aside .container {
-  padding: 1.625rem 1.5rem 2rem;
-  border: 0.25rem solid var(--color-black);
-  background-color: var(--color-white);
-}
-
-@media (min-width: 540px) {
-  article .container,
-  aside .container {
-    padding: 1.75rem 2.5rem 2.5rem;
-  }
-}
-
-header a:not([class^="link"]):hover,
-footer a:not([class^="link"]):hover {
-  text-decoration-thickness: 0.1875em;
-}
-
-main a:not([class^="link"]):hover,
-aside a:not([class^="link"]):hover {
-  background-color: var(--color-peach);
-}
-
-aside .container {
-  display: grid;
-  justify-items: center;
-}
-
-header,
-nav,
-article,
-aside,
-.page-footer {
-  width: 100%;
-  max-width: 65rem;
-  margin: 0 auto;
-  padding: 0.5rem;
-}
-
-@media (min-width: 540px) {
-  header,
-  nav,
-  article,
-  aside,
-  .page-footer {
-    padding: 1rem;
-  }
-}
-
-main {
-  padding-top: 6rem;
-}
-
-main:focus {
-  outline: none;
-}
-
-main .container h3 {
-  margin-top: 2rem;
-}
-
-main article + article,
-section + section,
-aside,
-aside + aside {
-  margin-top: 4rem;
-}
-
-article section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-header {
-  padding-bottom: 4rem;
-  color: var(--color-black);
-  text-align: center;
-}
-
-header h1 {
-  position: relative;
-  margin-bottom: 0;
-  padding: 5rem 0 2.5rem;
-  color: var(--color-white);
-  font-style: italic;
-  letter-spacing: -0.05em;
-  text-shadow: var(--header-text-shadow);
-  white-space: pre-wrap;
-}
-
-@media (min-width: 600px) {
-  header h1 {
-    padding: 1em 0 3.25rem;
-  }
-}
-
-header h2 {
-  max-width: 30ch;
-  font-size: clamp(1.875rem, 4vw, var(--font-size-h2));
-  font-weight: var(--font-weight-semibold);
-  margin: auto auto 0.65em;
-}
-
-header p {
-  margin-bottom: 2rem;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0.125rem;
-  list-style: none;
-  font-size: 1.25rem;
-  border: 0.25rem solid var(--color-black);
-  background-color: var(--color-red);
-}
-
-@media (min-width: 540px) {
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-nav ul li {
-  margin: 0.375rem 0.375rem 0.5rem;
-  text-align: center;
-}
-
-@media (min-width: 540px) {
-  nav ul li {
-    flex: 1 0 45%;
-  }
-}
-
-@media (min-width: 600px) {
-  nav ul li {
-    flex: 1 0 30%;
-  }
-}
-
-@media (min-width: 940px) {
-  nav ul li {
-    flex: 1 0 auto;
-  }
-}
-
-nav ul a {
-  position: relative;
-  display: block;
-  padding: 0.5em;
-  color: var(--color-white);
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-semibold);
-  border: 0.1875rem solid var(--color-red);
-  border-radius: 2em;
-  text-decoration: none;
-}
-
-nav ul a:hover {
-  background-color: var(--color-dark-red);
-  border-color: var(--color-black);
-}
-
-nav ul a:focus {
-  background-color: var(--color-dark-red);
-}
-
-#about section:nth-child(2) {
-  margin-top: 6rem;
-}
-
-#about section:nth-child(2) p:nth-of-type(2) {
-  align-self: center;
-  margin-top: 2rem;
-  font-size: var(--font-size-h4);
-  font-weight: var(--font-weight-bold);
-  text-align: center;
-}
-
-#about section:nth-child(2) ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 1rem 0 2rem;
-  padding: 0;
-  list-style: none;
-}
-
-#about section:nth-child(2) ul li {
-  position: relative;
-  margin: 0.25em 0.25em 1em;
-  padding: 0.5em 0.75em;
-  color: var(--color-white);
-  border-radius: 0.5em;
-  background-color: var(--color-black);
-}
-
-#about section:nth-child(2) ul li::before {
-  position: absolute;
-  content: '';
-  left: 0.75em;
-  bottom: -0.5em;
-  width: 0;
-  height: 0;
-  border-top: 5px solid var(--color-black);
-  border-left: 15px solid var(--color-black);
-  border-right: 5px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-
-#guidelines p:nth-of-type(1),
-#contribute p:nth-of-type(1) {
-  font-size: var(--font-size-h4);
-  font-weight: var(--font-weight-bold);
-}
-
-#guidelines .container > a {
-  align-self: center;
-  margin-top: 1rem;
-}
-
-#contribute section {
-  padding-bottom: 0;
-  border-bottom: none;
-  background-color: var(--color-white);
-}
-
-#contribute section:nth-child(2) {
-  padding-top: 0;
-  margin-top: 0;
-  border-top: none;
-}
-
-#contribute ol {
-  position: relative;
-  counter-reset: contribute-counter;
-  padding-left: 0;
-  list-style: none;
-}
-
-#contribute ol li {
-  position: relative;
-  counter-increment: contribute-counter;
-  padding-left: 3rem;
-}
-
-#contribute ol li::before {
-  position: absolute;
-  content: counter(contribute-counter);
-  top: -0.1875rem;
-  left: 0;
-  width: 1.5em;
-  height: 1.5em;
-  color: var(--color-yellow);
-  font-size: var(--font-size-h4);
-  font-weight: var(--font-weight-bold);
-  border-radius: 50%;
-  background-color: var(--color-black);
-  text-align: center;
-}
-
-#files .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  border-top: none;
-}
-
-#files .container h3 {
-  min-width: 100%;
-}
-
-#files .container a {
-  font-size: 1.5rem;
-}
-
-#files .container a,
-.page-footer .container ul li {
-  margin: 0.5rem;
-}
-
-.features {
-  margin: 0 0 2rem;
-  padding: 0;
-  list-style: none;
-}
-
-.features li {
-  position: relative;
-  padding: 1rem 0;
-  text-align: center;
-}
-
-.features li > span {
-  display: block;
-}
-
-.features li > span span {
-  display: block;
-}
-
-.features li > span span:nth-child(2) {
-  position: relative;
-}
-
-.profile ul {
-  margin: 0 0 1.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-.profile ul li {
-  display: flex;
-  padding: 0.45em;
-}
-
-.profile ul li span:nth-child(1) {
-  margin-right: 0.5em;
-  font-weight: var(--font-weight-bold);
-}
-
-.page-footer {
-  position: relative;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.page-footer .container > :last-child {
-  margin-bottom: 0;
-}
-
-.page-footer p {
-  max-width: 75ch;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.page-footer p a {
-  color: inherit;
-}
-
-.page-footer ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 0 2rem;
-  padding: 0;
-  list-style: none;
-}
-
-.skip-link {
-  position: absolute;
-  top: auto;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  color: var(--color-white);
-  font-size: 1.125rem;
-  background-color: var(--color-blue);
-  text-decoration: none;
+  height: 100vh;
+  background: hsl(194, 66%, 49%);
   overflow: hidden;
+  font-family: Inconsolata,sans-serif;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
-.skip-link:focus {
-  top: 0;
-  left: 0;
-  width: auto;
-  height: auto;
-  margin: 0.5em;
-  color: var(--color-gray);
+.circle {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin: -75px;
+  background: red;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
 }
 
-.skip-link,
-nav ul,
-[class^="link"],
-.profile .container > a {
-  border-radius: 2em;
-  box-shadow: inset 0.1875rem 0.1875rem var(--color-white), inset -0.1875rem -0.1875rem var(--color-black);
+#sun {
+  background: #ffff77;
+  box-shadow: 0 0 50px #ffff77;
 }
 
-.skip-link,
-nav ul a,
-[class^="link"],
-.profile .container > a {
-  font-size: 1.25rem;
-  text-shadow: var(--link-text-shadow);
+#moon {
+  background: #222;
+  left: 50%;
 }
 
-[class^="link"],
-.profile .container > a {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-  background-color: var(--color-blue);
-}
-
-.skip-link:focus,
-[class^="link"],
-.profile .container > a {
-  padding: 0.875em 1em;
-  font-weight: var(--font-weight-semibold);
-  line-height: 1;
-  border: 0.1875rem solid var(--color-black);
+#perc {
+  position: absolute;
+  width: 100%;
   text-align: center;
+  top: 50%;
+  margin-top: 110px;
+  color: white;
+  pointer-events: none;
+}
+.jk {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  margin-top: 140px;
+  color: white;
+  z-index: 10;
+}
+a{
   text-decoration: none;
-  text-transform: uppercase;
+  color: #0ff;
 }
-
-.skip-link:focus,
-[class^="link"]:hover,
-[class^="link"]:focus,
-.profile .container > a:hover,
-.profile .container > a:focus {
-  background-color: var(--color-dark-blue);
+a:hover{
+  text-decoration: none;
+  color: #ff0;
 }
-
-nav ul a:hover,
-nav ul a:focus,
-[class^="link"]:hover,
-[class^="link"]:focus,
-.profile .container > a:hover,
-.profile .container > a:focus {
-  color: var(--color-gray);
-  transform: translate(0, 0.025em);
-  box-shadow: inset 0.125em 0.125em var(--color-black);
-}
-
-.skip-link:focus,
-nav ul a:focus,
-[class^="link"]:focus,
-.profile .container > a:focus {
-  border-color: var(--color-white);
-  box-shadow: 0 0 0 0.1875rem var(--color-black);
-  outline: 2px solid transparent;
-  outline-offset: 4px;
-}
-
-.link-github span {
-  display: block;
-  height: 1em;
-}
-
-.link-github svg {
-  position: relative;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.375em;
-  fill: currentColor;
-  stroke: var(--color-black);
-  stroke-width: 3px;
-}
-
 	</style>
-  <a href="#main" class="skip-link">Skip to main content</a>
-	
-<header id="top">
-  <div class="container">
-    <h1>GEEKY PEOPLE</h1>
-    <h2>WELCOME TO THE GEEKS</h2>
-    <p>
-      Maintained by <a href="https://teams.microsoft.com/l/team/19%3ae100ec24791b49db92d9e024e6fdcb15%40thread.tacv2/conversations?groupId=1fe52e7b-a86e-45e1-8285-d77f90ee9518&tenantId=7e32cae9-0830-4894-b32e-4d74201e01ca">GEEKS</a> of
-      <a href="https://highschooldublin.com/">THE HSD</a>
-    </p>
-    <a href="https://teams.microsoft.com/l/team/19%3ae100ec24791b49db92d9e024e6fdcb15%40thread.tacv2/conversations?groupId=1fe52e7b-a86e-45e1-8285-d77f90ee9518&tenantId=7e32cae9-0830-4894-b32e-4d74201e01ca" class="link-github"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-          <path d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798z"></path>
-        </svg>
-      </span>
-      BECOME A GEEK (JEDI MASTER)</a>
-  </div>
-</header>
-<nav>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#people">people</a></li>
-    <li><a href="#geekycraft">geekycraft</a></li>
-    <li><a href="#hw">hw-club</a></li>
-    <li><a href="#resources">Resources</a></li>
-  </ul>
-</nav>
+	<!--The prettiest HTML you ever did see-->
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+<audio id="audio" autoplay loop>
+  <source src="https://picturelements.github.io/images/nggyu.mp3" type="audio/mpeg"></source>
+  You can't play audio.
+</audio>
+<div class="circle" id="sun"></div>
+<div class="circle" id="moon"></div>
+<div id="perc">10%</div>
+<div class="jk">JK Here is the link: <a target="_blank" href="https://geeky-people.herokuapp.com/geekycraft.html">GEEKYCRAFT</a></div>
+<script>
+	//Another contribution to the great Eclipse/Volume circlejerk
 
-<main id="main" tabIndex="-1">
-  <div class="container">
-    <article id="about">
-      <section class="container">
-        <h2>about</h2>
-        <p>
-          GEEKYPEOPLE:<br>
-          In one word, we are a very small association of <strong>geeks</strong>.... 
-        </p>
+var moon=document.getElementById("moon"),
+    parc=document.getElementById("perc"),
+    audio=document.getElementById("audio"),
+    dragging=false,
+    radius=75,
+    area=Math.PI*radius*radius,
+    offs=[0,0];
 
-        <blockquote>
-          <p>
-            <strong>How it works:</strong> On one morn, in airfield, Dublin, a bunch of 
-            <a href="#guidel  ">GEEKS</a> decided to make a ms-teams group chat. And that's basically it..... Ye.🥰
-          </p>
-        </blockquote>
-        <p>
-          
-        </p>
-      </section>
-      <section class="container" id="people">
-        <h2>people</h2>
-        <p>
-          <strong>Grizelda a cow</strong><br>A.K.A Seán. The sheep of the group. Very good at geography.
-          <br>
-          <strong>NotMrBeast</strong> <br>A.K.A Elisabetta. By far the smartest of the group. And prob the one with the most common sence!<br>
-          <strong>Technoblade/Smiley</strong><br>A.K.A Ivar. Never dies. He has a large talent in art, and adores his Minecraft. Planning to make NotVine.  slower than a sloth on sleeping pills.<br>
-	  <strong>🔺▶🔺Ⓜ️</strong><br>A.K.A Adam. Also very smart. Enjoyes his lego.<br>
- <strong>Tommy Innit</strong><br>A.K.A Daniel. Loves his 18+ content....<br>
- <strong>ANIME BOY</strong><br>A.K.A Toby.<br>
+function init(){
+  moon.addEventListener("mousedown",selectMoon);
+  moon.addEventListener("touchstart",selectMoon);
+  document.body.addEventListener("mousemove",moveMoon);
+  document.body.addEventListener("touchmove",moveMoon);
+  document.body.addEventListener("mouseup",dropMoon);
+  document.body.addEventListener("touchend",dropMoon);
+  setMoonData(window.innerWidth/2+radius*2.5,window.innerHeight/2);
+  audio.play();
+}
+
+function selectMoon(evt){
+  dragging=true;
+  var coords=getCoords(evt),
+      bcr=moon.getBoundingClientRect();
+  offs=[coords[0]-bcr.left-radius,coords[1]-bcr.top-radius];
+}
+
+function moveMoon(evt){
+  if (!dragging)
+    return;
+  var coords=getCoords(evt);
+  setMoonData(coords[0]-offs[0],coords[1]-offs[1]);
+}
+
+function setMoonData(x,y){
+  moon.style.left=x/window.innerWidth*100+"%";
+  moon.style.top=y/window.innerHeight*100+"%";
   
-        </p>
-        <p>Some examples of Toby's dictionary include:</p>
-        <ul>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          <li>Kill me!</li>
-          
-        </ul>
-        <p>
-          you get the idea.... Anime level 100000!
-        </p>
-        <p>
-         <strong>Me....</strong> <br>A.K.A. Haruki. The IT guy. 
-        </p>
-      </section>
-    </article>
-    <article id="geekycraft">
-      <section class="container">
-        <h2>Geekycraft</h2>
-        <h3>
-          <a href="https://geeky-people.herokuapp.com/geekycraft.html">Geekycraft version Alpha 0.7.1</a>
-<pre><p>
-	Controls:
+  var offset=Math.hypot(x-window.innerWidth/2,y-window.innerHeight/2),
+      sector=Math.acos((offset/2)/radius)/Math.PI,
+      triangle=Math.sqrt(radius*radius-offset*offset/4)*(offset/2),
+      overlap=(area*sector-triangle)*2/area || 0,
+      opacity=Math.max(400-offset,0)/1000,
+      expOverlap=Math.pow(overlap,4);
+  
+  //Bling bling
+  moon.style.boxShadow="inset "+(x-window.innerWidth/2)/10+"px "+(y-window.innerHeight/2)/10+"px 50px rgba(255, 255, 119, "+opacity+")";
+  moon.style.background="hsl(194, 56%, "+(1-expOverlap)*60+"%)";
+  perc.innerHTML="Volume: "+(overlap*100).toPrecision(4)+"%";
+  document.body.style.background="hsl("+(194+Math.floor(166*expOverlap))+", 66%, "+(1-expOverlap)*50+"%)";
+  
+  //Oh yeah, set the volume, I guess.
+  audio.volume=overlap;
+}
 
- * Right-click (or ctrl + left-click): place block
- * Left-click: Remove block
- * Middle-click: Pick block
- * Q: Sprint
- * Shift: Sneak
- * W: Walk forward
- * S: Walk backward
- * A: Walk left
- * D: Walk right
- * E: Open inventory
- * B: Toggle super Breaker
- * Z: Zoom
- * L: Toggle Spectator mode
- * Enter: Toggle slab/stair mode
- * Arrow Keys: look around
- * P or Esc: pause/unpause
- * 1-9 navigate hotbar
- * Spacebar: jump
- * Double jump: toggle flight
- * Shift (flying): fly down
- * Space (flying): fly up
- * T: Reload textures
- * ; (semicolon): Release the pointer<br> without pausing (for screenshots)
- * Backspace or delete: drops the <br>item you're holding right now
+function dropMoon(){
+  dragging=false;
+}
 
-Notes and accreditation:
- * This program (Geekycraft) was made by Haruki (me).
- * The textures are 100% copied from real <br>Minecraft, and are the property 
- of Mojang and Microsoft with whom I have no association.
- * The real Minecraft game can be bought and downloaded at 
- https://www.minecraft.net/en-us/
+function getCoords(evt){
+  return [(evt.touches || [evt])[0].clientX,(evt.touches || [evt])[0].clientY];
+}
 
+Math.hypot=function(a,b){
+  return Math.sqrt(a*a+b*b);
+};
 
- * Chunks are kept in memory until you 
- restart. So don't explore too far or memory <br>usage will grow until it 
- crashes unrecoverably.
-
-
-To-Do:
- * A lot. Check out the GitHub repo if you'd like<br> to collaborate on this.
-</p>
-        </pre>
-      </section>
-    </article>
-    
-  </div>
-</main>
-<aside class="profile" aria-labelledby="profile-title">
-  <div class="container" id="hw">
-    <h4 id="profile-title">HW-CLUB</h4>
-    <ul>
-      <li class="profile-title"><span>HW</span> <span>CLUB</span></li>
-      <li class="profile-author"><span></span> <span>Join the <a href="https://teams.microsoft.com/l/team/19%3a9978fd7939d14a6eb04ee692c21d4f0a%40thread.tacv2/conversations?groupId=5028dd37-8647-446d-9839-cd4e4d72b0f5&tenantId=7e32cae9-0830-4894-b32e-4d74201e01ca">HW GROUP NOW! </a></span>We chat about HW! LEGIT!</li>
-    
-  </div>
-</aside>
-<footer class="page-footer">
-  <div class="container" id="resources">
-    <p>
-      Created and maintained by
-      .... Wait, I said this before!<br>
-	    <a href="#top">SCROLL TO TOP</a>
-    </p>
-  </div>
-</footer>
-
+init();
+</script>
 </body>
 </html>
